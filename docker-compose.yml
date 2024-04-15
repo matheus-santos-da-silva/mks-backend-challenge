@@ -1,0 +1,32 @@
+version: "3.5"
+services: 
+  mks-backend-challenge:
+    container_name: mks-backend-challenge
+    build: 
+      context: "./"
+      dockerfile: Dockerfile
+
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mks-challenge
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    container_name: redis-container
+    ports:
+      - "6379:6379" 
