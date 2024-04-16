@@ -19,7 +19,7 @@ import {
   HttpUnauthorizedError,
 } from 'src/presentation/swagger/http-error';
 import { MovieResponseViewModel } from 'src/presentation/view-models/movies/movie-vm';
-import { UpdateMovieVM } from 'src/presentation/view-models/movies/updatre-movie-vm';
+import { UpdateMovieVM } from 'src/presentation/view-models/movies/update-movie-vm';
 import { validateToken } from 'src/data/utils/validate-token';
 
 @ApiTags('Movies')
