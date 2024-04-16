@@ -12,13 +12,20 @@
 $ git clone https://github.com/matheus-santos-da-silva/mks-backend-challenge
 ```
 
-### 2 - Em seu terminal rode o docker-compose
+### 2 - Crie um .env e preencha as variáveis de ambiente com as urls (Database e Redis)
+
+```
+REDIS_URL
+DATABASE_URL
+```
+
+### 3 - Em seu terminal rode o docker-compose
 
 ```
 $ docker-compose up
 ```
 
-### 3 - O Docker fará a build do projeto e iniciará ele. Após isso, acesse a rota: **http://localhost:3000/api-docs**
+### 4 - O Docker fará a build do projeto e iniciará ele. Após isso, acesse a rota: **http://localhost:3000/api-docs**
 
 ---
 
