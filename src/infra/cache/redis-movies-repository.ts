@@ -20,19 +20,26 @@ export class RedisMoviesRepository
     const cachedMovies = await this.redis.get('movies');
     if (!cachedMovies) {
       const movies = await this.moviesRepository.getAll();
-      await this.redis.set('movies', JSON.stringify(movies), 'EX', 15);
+      await this.redis.set('movies', JSON.stringify(movies), 'EX', 300);
       return movies;
     }
     return JSON.parse(cachedMovies);
   }
 
   async getById(id: string): Promise<MovieEntity> {
-    const cachedMovie = await this.redis.get(`movie-${id}`);
-    if (!cachedMovie) {
-      const movies = await this.moviesRepository.getById(id);
-      await this.redis.set(`movie-${id}`, JSON.stringify(movies), 'EX', 3600);
-      return movies;
+    const cachedMovies: MovieEntity[] = JSON.parse(
+      await this.redis.get('movies'),
+    );
+    let cachedMovie: MovieEntity = null;
+    for (const movie of cachedMovies) {
+      if (movie.id === id) {
+        cachedMovie = movie;
+      }
     }
-    return JSON.parse(cachedMovie);
+    if (!cachedMovies) {
+      const movie = await this.moviesRepository.getById(id);
+      return movie;
+    }
+    return cachedMovie;
   }
 }
