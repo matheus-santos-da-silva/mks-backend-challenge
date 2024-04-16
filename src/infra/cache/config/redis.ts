@@ -4,9 +4,7 @@ import { Redis } from 'ioredis';
 @Injectable()
 export class RedisService extends Redis {
   constructor() {
-    super({
-      host: 'redis',
-    });
+    super(`${process.env.REDIS_URL}`);
 
     super.on('error', (error) => {
       console.log('Error on Redis');
