@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MoviesControllersModule } from './presentation/controllers/movies/movies-controllers.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsersControllersModule } from './presentation/controllers/users/users-controllers.module';
+import { DATABASE_URL } from './env';
 @Module({
   imports: [
     MoviesControllersModule,
@@ -11,7 +12,7 @@ import { UsersControllersModule } from './presentation/controllers/users/users-c
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'postgres',
-      url: `${process.env.DATABASE_URL}`,
+      url: DATABASE_URL,
       entities: [`${__dirname}/**/*.entity{.js,.ts}`],
       synchronize: false,
       migrations: [`${__dirname}/infra/database/migrations/{.ts,*.js}`],
